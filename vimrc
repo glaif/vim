@@ -8,6 +8,13 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'xolox/vim-easytags'
+Plugin 'xolox/vim-misc'
+
 " All Plugins must be added before the following line
 call vundle#end()            " required by Vundle
 filetype plugin indent on    " required by Vundle
@@ -23,5 +30,12 @@ filetype plugin indent on    " required by Vundle
 " see :h vundle for more details or wiki for FAQ
 " Put non-Plugin stuff after this line
 
-syntax on
-set encoding=utf-8
+syntax on			" turns syntax highlighting on
+set encoding=utf-8		" set encoding to utf-8
+set number 			" turn on line numbers`
+set hlsearch 			" turn on hightlighted searching
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+" map F8 to toggle Tagbar
+nmap <F8> :TagbarToggle<CR>	
