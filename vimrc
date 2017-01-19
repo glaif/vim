@@ -59,6 +59,7 @@ set wrap            " wrap long lines of text
 set textwidth=80    " sets the line length for wrapping
 set linebreak       " breaks lines for wrapping at specific chars
 " set colorcolumn=81  " set a colored column at position to identify long lines
+set laststatus=2    " show airline status bar all the time
 
 " key remappings
 
@@ -83,3 +84,5 @@ vnoremap / /\v
 " make sure to diable tty flow control by default
 " add 'stty -ixon' to .bashrc
 nnoremap <C-s> :update<CR>
+
+let g:airline_theme='dark'
