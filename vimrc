@@ -45,6 +45,7 @@ set shiftwidth=4
 set softtabstop=4
 set expandtab
 set spell spelllang=en_us	    " turn on spellchecking by default
+set nospell
 set backspace=indent,eol,start  " saner backspace
 set ruler           " shows current position in buffer
 set relativenumber  " relative line numbering
@@ -68,9 +69,6 @@ nnoremap <C-up> <C-w><up>
 nnoremap <C-down> <C-w><down>
 nnoremap <C-left> <C-w><left>
 nnoremap <C-right> <C-w><right>
-" remap >tab> to match bracket pairs
-nnoremap <tab> %
-vnoremap <tab> %
 " map F8 to toggle Tagbar
 nmap <F8> :TagbarToggle<CR>	
 " allow using '.' with visual mode
@@ -85,4 +83,48 @@ vnoremap / /\v
 " add 'stty -ixon' to .bashrc
 nnoremap <C-s> :update<CR>
 
+nnoremap <tab> gt
+vnoremap <tab> gt
+nnoremap <S-tab> gT
+vnoremap <S-tab> gT
+
 let g:airline_theme='dark'
+
+"always showthe tabline
+set stal=2
+
+" add numbering to the tabline
+set tabline=%!MyTabLine()
+function MyTabLine()
+    let s = ''
+    for i in range(tabpagenr('$'))
+        " select the highlighting
+        if i + 1 == tabpagenr()
+            let s .= '%#TabLineSel#'
+        else
+            let s .= '%#TabLine#'
+        endif
+
+        " set the tab page number (for mouse clicks)
+        let s .= '%' . (i + 1) . 'T'
+
+        " the label is made by MyTabLabel()
+        let s .= ' %{MyTabLabel(' . (i + 1) . ')} '
+    endfor
+
+    " after the last tab fill with TabLineFill and reset tab page nr
+    let s .= '%#TabLineFill#%T'
+
+    " right-align the label to close the current tab page
+    if tabpagenr('$') > 1
+        let s .= '%=%#TabLine#%999Xclose'
+    endif
+    return s
+endfunction
+
+function MyTabLabel(n)
+    let buflist = tabpagebuflist(a:n)
+    let winnr = tabpagewinnr(a:n)
+    " return bufname(buflist[winnr - 1])
+    return buflist[winnr - 1] . ') ' . bufname(buflist[winnr - 1])
+endfunction
