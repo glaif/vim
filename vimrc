@@ -83,10 +83,8 @@ vnoremap / /\v
 " add 'stty -ixon' to .bashrc
 nnoremap <C-s> :update<CR>
 
-nnoremap <tab> gt
-vnoremap <tab> gt
-nnoremap <S-tab> gT
-vnoremap <S-tab> gT
+nnoremap <C-w> gt
+vnoremap <C-w> gt
 
 let g:airline_theme='dark'
 
